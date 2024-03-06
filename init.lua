@@ -609,29 +609,21 @@ require('lazy').setup({
             -- enable_autosnippets = true,
           }
 
-          vim.keymap.set({ 'i', 's' }, '<C-K>', function()
-            if ls.expandable() then
-              ls.expand()
-            end
+          vim.keymap.set({ 'i' }, '<C-K>', function()
+            ls.expand()
           end, { silent = true })
-
           vim.keymap.set({ 'i', 's' }, '<C-J>', function()
-            if ls.jumpable(1) then
-              ls.jump(1)
-            end
+            ls.jump(1)
           end, { silent = true })
-
           vim.keymap.set({ 'i', 's' }, '<C-H>', function()
-            if ls.jumpable(-1) then
-              ls.jump(-1)
-            end
+            ls.jump(-1)
           end, { silent = true })
 
-          vim.keymap.set({ 'i', 's' }, '<C-L>', function()
+          vim.keymap.set({ 'i', 's' }, '<C-E>', function()
             if ls.choice_active() then
               ls.change_choice(1)
             end
-          end)
+          end, { silent = true })
         end,
       },
       'saadparwaiz1/cmp_luasnip',
