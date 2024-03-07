@@ -1,46 +1,32 @@
+require('luasnip.session.snippet_collection').clear_snippets 'tex'
+
 local ls = require 'luasnip'
 local s = ls.snippet
-local sn = ls.snippet_node
-local isn = ls.indent_snippet_node
 local t = ls.text_node
 local i = ls.insert_node
-local f = ls.function_node
 local c = ls.choice_node
 local d = ls.dynamic_node
+local sn = ls.snippet_node
+local extras = require 'luasnip.extras'
+local rep = extras.rep
 local fmt = require('luasnip.extras.fmt').fmt
 local fmta = require('luasnip.extras.fmt').fmta
 
 ls.add_snippets('tex', {
   s(
     { trig = 'beg', wordTrig = false },
-    c(1, {
-      fmt(
-        [[
-        \begin{{{env}}}{lb1}{interior}{lb2}\end{{{env}}}
-        ]],
-        {
-          env = i(1),
-          interior = i(2),
-          lb1 = t { '', '    ' },
-          lb2 = t { '', '' },
-        },
-        {
-          repeat_duplicates = true,
-        }
-      ),
-      fmt(
-        [[
-        \begin{{{env}}} {interior} \end{{{env}}}
-        ]],
-        {
-          env = i(1),
-          interior = i(2),
-        },
-        {
-          repeat_duplicates = true,
-        }
-      ),
-    })
+    fmta(
+      [[
+\begin{<env>}
+    <interior>
+\end{<env_rep>}
+      ]],
+      {
+        env = i(1),
+        interior = i(0),
+        env_rep = rep(1),
+      }
+    )
   ),
   s({ trig = '=>', wordTrig = false }, t '\\implies'),
   s({ trig = 'iff', wordTrig = false }, t '\\iff'),
@@ -86,6 +72,13 @@ ls.add_snippets('tex', {
       { t '\\prod_{', i(1), t '}' },
     })
   ),
+  s(
+    { trig = 'int', wordTrig = false },
+    c(1, {
+      { t '\\int_{', i(1), t '}^{', i(2), t '}' },
+      { t '\\int ' },
+    })
+  ),
   s({ trig = 'frac', wordTrig = false }, { t '\\frac{', i(1), t '}{', i(2), t '}' }),
   s({ trig = 'lim', wordTrig = false }, { t '\\lim_{', i(1), t '}' }),
   s({ trig = 'int', wordTrig = false }, { t '\\int_{', i(1), t '}^{', i(2), t '}' }),
@@ -99,6 +92,7 @@ ls.add_snippets('tex', {
   s({ trig = 'mm', wordTrig = false }, { t { '\\[', '    ' }, i(1), t { '', '\\]' } }),
   s({ trig = '<>', wordTrig = false }, { t '\\langle', i(1), t '\\rangle' }),
   s({ trig = '()', wordTrig = false }, { t '\\left(', i(1), t '\\right)' }),
+  s({ trig = '[]', wordTrig = false }, { t '\\left[', i(1), t '\\right]' }),
   s({ trig = '...', wordTrig = false }, { t '\\ldots' }),
   s({ trig = '···', wordTrig = false }, { t '\\cdots' }),
   s({ trig = '""', wordTrig = false }, { t '\\`\\`', i(1), t "''" }),
@@ -136,6 +130,6 @@ ls.add_snippets('tex', {
   s({ trig = 'ssq', wordTrig = false }, { t '\\subseteq' }),
   s({ trig = 'ssnq', wordTrig = false }, { t '\\subsetneq' }),
   s({ trig = 'snsq', wordTrig = false }, { t '\\nsubseteq' }),
-  s({ trig = 'cl', wordTrig = false }, { t '\\overline{', i(1), t '}' }),
+  s({ trig = 'bar', wordTrig = false }, { t '\\overline{', i(1), t '}' }),
   s({ trig = 'eps', wordTrig = false }, { t '\\varepsilon' }),
 })
