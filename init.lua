@@ -1,7 +1,7 @@
 --[[
 
 =====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
+=====================================================================
 =====================================================================
 ========                                    .-----.          ========
 ========         .----------------------.   | === |          ========
@@ -10,7 +10,7 @@
 ========         ||   KICKSTART.NVIM   ||   |-----|          ========
 ========         ||                    ||   | === |          ========
 ========         ||                    ||   |-----|          ========
-========         ||:Tutor              ||   |:::::|          ========
+========         ||                    ||   |:::::|          ========
 ========         |'-..................-'|   |____o|          ========
 ========         `"")----------------(""`   ___________      ========
 ========        /::::::::::|  |::::::::::\  \ no mouse \     ========
@@ -20,8 +20,7 @@
 =====================================================================
 =====================================================================
 
-  If you don't know anything about Lua, I recommend taking some time to read through
-  a guide. One possible example which will only take 10-15 minutes:
+  Quick Lua guide:
     - https://learnxinyminutes.com/docs/lua/
 
   After understanding a bit more about Lua, you can use `:help lua-guide` as a
@@ -34,8 +33,6 @@ If you experience any errors while trying to install kickstart, run `:checkhealt
 --]]
 
 -- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -43,14 +40,10 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
 
 -- Make line numbers default
 vim.opt.number = true
--- You can also add relative line numbers, for help with jumping.
---  Experiment for yourself to see if you like it!
+-- Set relative numbers
 vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
@@ -61,8 +54,6 @@ vim.opt.mousemodel = 'extend'
 vim.opt.showmode = false
 
 -- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
 
 -- Enable break indent
@@ -87,8 +78,6 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Sets how neovim will display certain whitespace in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
@@ -108,7 +97,6 @@ vim.opt.shell = 'powershell.exe'
 vim.opt.wrap = false
 
 -- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
@@ -121,11 +109,6 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
@@ -136,8 +119,6 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
@@ -162,8 +143,6 @@ vim.keymap.set('n', '<leader>tc', vim.cmd.tabclose, { desc = '[T]ab [C]lose' })
 --  See `:help lua-guide-autocommands`
 
 -- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -173,7 +152,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -183,15 +161,10 @@ vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 --
---  To check the current status of your plugins, run
---    :Lazy
+--  To check the current status of your plugins, run :Lazy
 --
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins, you can run
---    :Lazy update
---
--- NOTE: Here is where you install your plugins.
+--  To update plugins, you can run :Lazy update
+
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
@@ -624,22 +597,6 @@ require('lazy').setup({
             -- Autosnippets
             -- enable_autosnippets = true,
           }
-
-          vim.keymap.set({ 'i' }, '<C-K>', function()
-            ls.expand()
-          end, { silent = true })
-          vim.keymap.set({ 'i', 's' }, '<C-J>', function()
-            ls.jump(1)
-          end, { silent = true })
-          vim.keymap.set({ 'i', 's' }, '<C-H>', function()
-            ls.jump(-1)
-          end, { silent = true })
-
-          vim.keymap.set({ 'i', 's' }, '<C-E>', function()
-            if ls.choice_active() then
-              ls.change_choice(1)
-            end
-          end, { silent = true })
         end,
       },
       'saadparwaiz1/cmp_luasnip',
@@ -690,22 +647,24 @@ require('lazy').setup({
           --  completions whenever it has completion options available.
           ['<C-Space>'] = cmp.mapping.complete {},
 
-          -- Think of <c-l> as moving to the right of your snippet expansion.
-          --  So if you have a snippet that's like:
-          --  function $name($args)
-          --    $body
-          --  end
-          --
-          -- <c-l> will move you to the right of each of the expansion locations.
-          -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
+          ['<C-j>'] = cmp.mapping(function()
+            if luasnip.locally_jumpable() then
+              luasnip.jump()
+            end
+          end, { 'i', 's' }),
+          ['<C-k>'] = cmp.mapping(function()
+            if luasnip.expandable() then
+              luasnip.expand()
             end
           end, { 'i', 's' }),
           ['<C-h>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
+            end
+          end, { 'i', 's' }),
+          ['<C-l>'] = cmp.mapping(function()
+            if luasnip.choice_active() then
+              luasnip.change_choice(1)
             end
           end, { 'i', 's' }),
         },
@@ -714,21 +673,19 @@ require('lazy').setup({
           { name = 'luasnip' },
           { name = 'path' },
         },
+        experimental = {
+          ghost_text = true,
+        },
       }
     end,
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
+  {
     -- 'folke/tokyonight.nvim',
     'pineapplegiant/spaceduck',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-      -- Load the colorscheme here
       -- vim.cmd.colorscheme 'tokyonight-night'
       vim.cmd.colorscheme 'spaceduck'
 
