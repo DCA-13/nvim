@@ -143,6 +143,21 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Prime keybinds
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', 'J', 'mzJ`z')
+vim.keymap.set('n', 'Q', '<nop>')
+vim.keymap.set('n', 'N', 'Nzz')
+vim.keymap.set('n', 'n', 'nzz')
+
+-- Tab keybinds
+vim.keymap.set('n', '<leader>tn', vim.cmd.tabNext, { desc = '[T]ab [N]ext' })
+vim.keymap.set('n', '<leader>tp', vim.cmd.tabprevious, { desc = '[T]ab [P]revious' })
+vim.keymap.set('n', '<leader>tc', vim.cmd.tabclose, { desc = '[T]ab [C]lose' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -239,6 +254,7 @@ require('lazy').setup({
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = '[T]ab', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -603,7 +619,7 @@ require('lazy').setup({
             history = true,
 
             -- Update dynamic snippets as you type
-            updateevents = 'TextChanged,TextChangedI',
+            update_events = 'TextChanged,TextChangedI',
 
             -- Autosnippets
             -- enable_autosnippets = true,
