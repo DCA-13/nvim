@@ -96,6 +96,15 @@ vim.opt.shell = 'powershell.exe'
 -- Don't wrap lines at the end of the scren
 vim.opt.wrap = false
 
+-- Indenting
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.tabstop = 8
+vim.opt.softtabstop = 0
+
+-- Blinking cursor
+vim.cmd 'set guicursor=n-v-c-sm:block-blinkwait500-blinkon500-blinkoff500,i-ci-ve:ver25,r-cr-o:hor20'
+
 -- [[ Basic Keymaps ]]
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
@@ -167,7 +176,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  -- 'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -226,8 +235,10 @@ require('lazy').setup({
         ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+        ['<leader>w'] = { name = '[W]iki', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = '[T]ab', _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
+        ['<leader>l'] = { name = '[L]aTeX', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -648,8 +659,8 @@ require('lazy').setup({
           ['<C-Space>'] = cmp.mapping.complete {},
 
           ['<C-j>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable() then
-              luasnip.jump()
+            if luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
             end
           end, { 'i', 's' }),
           ['<C-k>'] = cmp.mapping(function()
@@ -674,36 +685,9 @@ require('lazy').setup({
           { name = 'path' },
         },
         experimental = {
-          ghost_text = true,
+          ghost_text = false,
         },
       }
-    end,
-  },
-
-  {
-    -- 'folke/tokyonight.nvim',
-    'pineapplegiant/spaceduck',
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      -- vim.cmd.colorscheme 'tokyonight-night'
-      vim.cmd.colorscheme 'spaceduck'
-
-      -- Use full colors
-      vim.opt.termguicolors = true
-
-      -- You can configure highlights by doing something like
-      vim.cmd.hi 'Comment gui=none'
-
-      if vim.g.colors_name == 'spaceduck' then
-        vim.cmd.hi 'Normal guifg=#edefd7 guibg=#0f111b'
-        vim.cmd.hi 'StatusLineNC guibg=#edefd7 guifg=#1b1c36'
-        vim.cmd.hi 'StatusLine guifg=#16172d guibg=#edefd7'
-        vim.cmd.hi 'MiniStatuslineModeNormal guibg=#5ccc96 guifg=#1b1c36'
-        vim.cmd.hi 'MiniStatuslineModeInsert guibg=#00a3cc guifg=#1b1c36'
-        vim.cmd.hi 'MiniStatuslineModeCommand guibg=#f2ce00 guifg=#1b1c36'
-        vim.cmd.hi 'MiniStatuslineModeVisual guibg=#e39400 guifg=#1b1c36'
-      end
     end,
   },
 
@@ -812,6 +796,9 @@ require('lazy').setup({
 })
 
 require('luasnip.loaders.from_lua').load { paths = '~/AppData/Local/nvim/lua/custom/snips/' }
+
+-- Skeletons
+vim.cmd.autocmd('BufNewFile', '*.tex', '0r', '~/AppData/Local/nvim/skeletons/tex/main.tex')
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

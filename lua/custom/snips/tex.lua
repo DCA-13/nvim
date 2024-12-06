@@ -17,13 +17,14 @@ ls.add_snippets('tex', {
     { trig = 'beg', wordTrig = false },
     fmta(
       [[
-\begin{<env>}
-    <interior>
-\end{<env_rep>}
+\begin{<env>}<interior>\end{<env_rep>}
       ]],
       {
         env = i(1),
-        interior = i(0),
+        interior = c(2, {
+          { t ' ', i(1), t ' ' },
+          { t { '', '  ' }, i(1), t { '', '' } },
+        }),
         env_rep = rep(1),
       }
     )
@@ -46,15 +47,15 @@ ls.add_snippets('tex', {
   s(
     { trig = 'UU', wordTrig = false },
     c(1, {
-      t '\\cup',
-      t '\\bigcup',
+      { t '\\cup', i(1) },
+      { t '\\bigcup', i(1) },
     })
   ),
   s(
     { trig = 'II', wordTrig = false },
     c(1, {
-      t '\\cap',
-      t '\\bigcap',
+      { t '\\cap', i(1) },
+      { t '\\bigcap', i(1) },
     })
   ),
   s({ trig = 'tq', wordTrig = false }, t '\\ \\big/\\ '),
@@ -89,7 +90,7 @@ ls.add_snippets('tex', {
   s({ trig = 'cal', wordTrig = false }, { t '\\mathcal{', i(1), t '}' }),
   s({ trig = 'frak', wordTrig = false }, { t '\\mathfrak{', i(1), t '}' }),
   s({ trig = 'scr', wordTrig = false }, { t '\\mathscr{', i(1), t '}' }),
-  s({ trig = 'mm', wordTrig = false }, { t { '\\[', '    ' }, i(1), t { '', '\\]' } }),
+  s({ trig = 'mm', wordTrig = false }, { t { '\\[', '  ' }, i(1), t { '', '\\]' } }),
   s({ trig = '<>', wordTrig = false }, { t '\\langle', i(1), t '\\rangle' }),
   s({ trig = '()', wordTrig = false }, { t '\\left(', i(1), t '\\right)' }),
   s({ trig = '[]', wordTrig = false }, { t '\\left[', i(1), t '\\right]' }),
@@ -124,12 +125,15 @@ ls.add_snippets('tex', {
   s({ trig = 'vac', wordTrig = false }, { t '\\emptyset' }),
   s({ trig = 'xx', wordTrig = false }, { t '\\times' }),
   s({ trig = 'l·l', wordTrig = false }, { t '\\lgem ' }),
-  s({ trig = '~~', wordTrig = false }, { t '\\wildtilde' }),
+  s({ trig = '~~', wordTrig = false }, { t '\\widetilde' }),
   s({ trig = 'o+', wordTrig = false }, { t '\\oplus' }),
   s({ trig = '--', wordTrig = false }, { t '\\setminus' }),
   s({ trig = 'ssq', wordTrig = false }, { t '\\subseteq' }),
   s({ trig = 'ssnq', wordTrig = false }, { t '\\subsetneq' }),
   s({ trig = 'snsq', wordTrig = false }, { t '\\nsubseteq' }),
+  s({ trig = 'spq', wordTrig = false }, { t '\\supseteq' }),
+  s({ trig = 'spnq', wordTrig = false }, { t '\\supsetneq' }),
+  s({ trig = 'snpq', wordTrig = false }, { t '\\nsupseteq' }),
   s({ trig = 'bar', wordTrig = false }, { t '\\overline{', i(1), t '}' }),
   s({ trig = 'eps', wordTrig = false }, { t '\\varepsilon' }),
 })

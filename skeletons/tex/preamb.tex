@@ -1,0 +1,56 @@
+\DeclareMathOperator{\id}{id} % Aplicación identidad
+\DeclareMathOperator{\Ima}{Im} % Imagen
+\DeclareMathOperator{\Ker}{Ker} % Núcleo
+\DeclareMathOperator{\codim}{codim} % Codimensión
+\DeclareMathOperator{\Crit}{Crit} % Puntos críticos
+\DeclareMathOperator{\Ind}{Ind} % Índice
+
+\let\Oldemptyset\emptyset
+
+\newcommand{\vemptyset}[1]{%
+  \scalebox{#1}{\hspace*{-0.25em}\raisebox{-2pt}{
+      \begin{tikzpicture}[line cap=round]
+        \draw[line width=0.5pt] (0,0) circle [radius=3pt];
+        \draw[line width=0.5pt] (-2pt,-5pt) -- (2pt,5pt);
+\end{tikzpicture}\hspace*{0.09em}}}}
+
+\DeclareDocumentCommand{\emptyset}{}{{
+    \ifcase\mathstyle
+      % 0 = \displaystyle % 1 = \crampeddisplaystyle
+      \expandafter\vemptyset{1} \or \expandafter\vemptyset{1} \or
+      % 2 = \textstyle % 3 = \crampedtextstyle
+      \expandafter\vemptyset{1} \or \expandafter\vemptyset{1} \or
+      % 4 = \scriptstyle % 5 = \crampedscriptstyle
+      \expandafter\vemptyset{0.67} \or \expandafter\vemptyset{0.67}
+    \else
+      % all other styles
+      \vemptyset{0.45}
+    \fi
+}}
+
+\DeclareDocumentCommand{\quot}{m O{0.5} m O{-0.5}}{% \quot{#1}[#2]{#3}[#4] -> #1/#3
+    \ifcase\mathstyle
+        % 0 = \displaystyle
+        \expandafter
+  \setbox0=\hbox{\ensuremath{#1}}% Guarda numerador
+  \setbox1=\hbox{\ensuremath{\diagup}}% Guarda barra /
+  \setbox2=\hbox{\ensuremath{#3}}% Guarda denominador
+  \raisebox{#2\ht1}{\usebox0}% Numerador
+  \mkern-5mu\rotatebox{-44}{\rule[#4\ht2]{0.4pt}{0.6cm}}% Barra % debería tener -#4\ht2+#2\ht0+\ht0 en lugar de 0.6cm
+  \mkern-4mu%
+  \raisebox{#4\ht2}{\usebox2}% Denominador
+    \or
+        % 1 = \crampeddisplaystyle
+        \expandafter
+  \setbox0=\hbox{\ensuremath{#1}}% Guarda numerador
+  \setbox1=\hbox{\ensuremath{\diagup}}% Guarda barra /
+  \setbox2=\hbox{\ensuremath{#3}}% Guarda denominador
+  \raisebox{#2\ht1}{\usebox0}% Numerador
+  \mkern-5mu\rotatebox{-44}{\rule[#4\ht2]{0.4pt}{0.6cm}}% Barra % debería tener -#4\ht2+#2\ht0+\ht0 en lugar de 0.6cm
+  \mkern-4mu%
+  \raisebox{#4\ht2}{\usebox2}% Denominador
+    \else
+        % all other styles
+        #1/#3
+    \fi
+}

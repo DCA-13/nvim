@@ -1,6 +1,7 @@
 return {
   {
     'startup-nvim/startup.nvim',
+    enabled = false,
     requires = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
     config = function()
       require('startup').setup {
