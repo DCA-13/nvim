@@ -82,7 +82,6 @@ ls.add_snippets('tex', {
   ),
   s({ trig = 'frac', wordTrig = false }, { t '\\frac{', i(1), t '}{', i(2), t '}' }),
   s({ trig = 'lim', wordTrig = false }, { t '\\lim_{', i(1), t '}' }),
-  s({ trig = 'int', wordTrig = false }, { t '\\int_{', i(1), t '}^{', i(2), t '}' }),
   s({ trig = 'norm', wordTrig = false }, { t '\\Vert', i(1), t '\\Vert' }),
   s({ trig = 'sin', wordTrig = false }, { t '\\sin(', i(1), t ')' }),
   s({ trig = 'cos', wordTrig = false }, { t '\\cos(', i(1), t ')' }),
