@@ -15,7 +15,7 @@ let g:vimtex_ui_method = {
       \ 'select': 'nvim',
       \}
 
-let g:vimtex_view_general_viewer = 'zathura'
+let g:vimtex_view_method = 'zathura'
 
 function! s:write_server_name() abort
   let nvim_server_file = (has('win32') ? $TEMP : '/tmp') . '/vimtexserver.txt'
