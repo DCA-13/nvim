@@ -14,7 +14,7 @@ return {
 
       if vim.g.colors_name == 'spaceduck' then
         vim.cmd.hi 'Normal guifg=#edefd7 guibg=#0f111b'
-        vim.cmd.hi 'StatusLineNC guifg=#edefd7 guibg=#1b1c36'
+        vim.cmd.hi 'StatusLineNC guibg=#edefd7 guifg=#1b1c36'
         vim.cmd.hi 'StatusLine guifg=#16172d guibg=#edefd7'
         vim.cmd.hi 'MiniStatuslineModeNormal guibg=#5ccc96 guifg=#1b1c36'
         vim.cmd.hi 'MiniStatuslineModeInsert guibg=#00a3cc guifg=#1b1c36'

@@ -102,6 +102,9 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 8
 vim.opt.softtabstop = 0
 
+-- Show column 80
+vim.cmd 'set cc=80'
+
 -- Blinking cursor
 vim.cmd 'set guicursor=n-v-c-sm:block-blinkwait500-blinkon500-blinkoff500,i-ci-ve:ver25,r-cr-o:hor20'
 
@@ -225,6 +228,7 @@ require('lazy').setup({
 
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
+    commit = '4433e5e',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
       require('which-key').setup()
@@ -733,6 +737,8 @@ require('lazy').setup({
 
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    branch = 'master',
+    commit = '9775d5d',
     build = ':TSUpdate',
     config = function()
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
