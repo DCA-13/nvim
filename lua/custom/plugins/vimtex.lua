@@ -15,6 +15,8 @@ let g:vimtex_ui_method = {
       \ 'select': 'nvim',
       \}
 
+let g:vimtex_view_general_viewer = 'zathura'
+
 function! s:write_server_name() abort
   let nvim_server_file = (has('win32') ? $TEMP : '/tmp') . '/vimtexserver.txt'
   call writefile([v:servername], nvim_server_file)
@@ -41,17 +43,17 @@ let g:vimtex_compiler_latexmk = {
     \}
 let g:vimtex_indent_lists = []
       ]]
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
-        pattern = { '*.tex' },
-        callback = function()
-          vim.keymap.set(
-            'n',
-            '<leader>lp',
-            [[:read ~/AppData/Local/nvim/skeletons/tex/preamb.tex<CR>]],
-            { noremap = true, silent = true, buffer = true, desc = 'Read [P]reamble' }
-          )
-        end,
-      })
+      -- vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+      --   pattern = { '*.tex' },
+      --   callback = function()
+      --     vim.keymap.set(
+      --       'n',
+      --       '<leader>lp',
+      --       [[:read ~/AppData/Local/nvim/skeletons/tex/preamb.tex<CR>]],
+      --       { noremap = true, silent = true, buffer = true, desc = 'Read [P]reamble' }
+      --     )
+      --   end,
+      -- })
     end,
   },
 }
