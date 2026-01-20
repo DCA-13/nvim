@@ -108,6 +108,9 @@ vim.cmd 'set guicursor=n-v-c-sm:block-blinkwait500-blinkon500-blinkoff500,i-ci-v
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+-- Set conceal to 0 in help pages
+vim.cmd 'autocmd FileType help setlocal conceallevel=0'
+
 -- [[ Basic Keymaps ]]
 
 -- Clear highlights on search when pressing <Esc> in normal mode
