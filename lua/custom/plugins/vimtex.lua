@@ -26,8 +26,8 @@ augroup vimtex_common
 augroup END
 
 let g:vimtex_compiler_latexmk = {
-    \ 'aux_dir' : '',
-    \ 'out_dir' : 'out',
+    \ 'aux_dir' : '.tex',
+    \ 'out_dir' : '',
     \ 'callback' : 1,
     \ 'continuous' : 1,
     \ 'executable' : 'latexmk',
