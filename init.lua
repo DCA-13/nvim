@@ -86,7 +86,7 @@ vim.o.cursorline = true
 vim.opt.scrolloff = 8
 
 -- Sets terminal emulator
-vim.opt.shell = 'powershell.exe'
+vim.opt.shell = 'bash'
 
 -- Don't wrap lines at the end of the scren
 vim.opt.wrap = false
