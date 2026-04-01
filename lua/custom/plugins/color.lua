@@ -14,12 +14,13 @@ return {
 
       if vim.g.colors_name == 'spaceduck' then
         vim.cmd.hi 'Normal guifg=#edefd7 guibg=#0f111b'
-        vim.cmd.hi 'StatusLineNC guibg=#edefd7 guifg=#1b1c36'
+        vim.cmd.hi 'StatusLineNC guibg=#1b1c36 guifg=#edefd7'
         vim.cmd.hi 'StatusLine guifg=#16172d guibg=#edefd7'
         vim.cmd.hi 'MiniStatuslineModeNormal guibg=#5ccc96 guifg=#1b1c36'
         vim.cmd.hi 'MiniStatuslineModeInsert guibg=#00a3cc guifg=#1b1c36'
         vim.cmd.hi 'MiniStatuslineModeCommand guibg=#f2ce00 guifg=#1b1c36'
         vim.cmd.hi 'MiniStatuslineModeVisual guibg=#e39400 guifg=#1b1c36'
+        vim.cmd.hi 'MiniStatuslineFilename guifg=#1b1c36 guibg=#edefd7'
         vim.cmd.hi 'VertSplit guifg=#090b11 guibg=#090b11'
         vim.cmd.hi 'Visual guibg=#343668'
         vim.cmd.hi 'Comment guifg=#41497f'
