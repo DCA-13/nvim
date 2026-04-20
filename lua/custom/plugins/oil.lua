@@ -161,7 +161,7 @@ return {
         ssh = {
           border = 'rounded',
         },
-        vim.keymap.set('n', '<leader>f', require('oil').toggle_float, { desc = '[F]iles' }),
+        -- vim.keymap.set('n', '<leader>f', require('oil').toggle_float, { desc = '[F]iles' }),
       }
     end,
   },
